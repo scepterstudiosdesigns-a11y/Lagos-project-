@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LedgerLink — visual preview</title>
+<style>
+:root {
+  --bg: #0f1115;
+  --surface: #181b22;
+  --surface-2: #20242e;
+  --border: #2a2f3a;
+  --text: #f4f6fb;
+  --muted: #98a1b3;
+  --accent: #18c07a;
+  --accent-dim: #0f7a4e;
+  --danger: #ff5d5d;
+  --warn: #f6b73c;
+  --radius: 16px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 16px 16px 96px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  margin: 8px 0 20px;
+}
+.brand .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.brand small { font-weight: 500; color: var(--muted); font-size: 12px; display: block; }
+
+h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: -0.5px; }
+h2 { font-size: 15px; margin: 0 0 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; }
+.muted { color: var(--muted); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.stat .label { color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+.stat .value { font-size: 26px; font-weight: 800; letter-spacing: -0.6px; }
+.stat .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 3px 9px; border-radius: 999px; font-weight: 600; }
+.pill.up { background: rgba(24,192,122,0.15); color: var(--accent); }
+.pill.down { background: rgba(255,93,93,0.15); color: var(--danger); }
+.pill.flat { background: var(--surface-2); color: var(--muted); }
+
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.row:last-child { border-bottom: none; }
+.row .title { font-weight: 600; }
+.row .meta { color: var(--muted); font-size: 12px; }
+.row .amount { font-weight: 700; white-space: nowrap; }
+
+.badge { font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.badge.paid { background: rgba(24,192,122,0.15); color: var(--accent); }
+.badge.pending { background: rgba(246,183,60,0.15); color: var(--warn); }
+.badge.low { background: rgba(255,93,93,0.15); color: var(--danger); }
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: 16px;
+}
+.field { margin-bottom: 12px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.field input, .field textarea, .field select {
+  width: 100%;
+  padding: 13px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  outline: none;
+}
+.field input:focus { border-color: var(--accent); }
+
+button.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #04130c;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: -0.2px;
+}
+button.btn:active { transform: translateY(1px); }
+button.btn.secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+button.btn.danger { background: transparent; color: var(--danger); border: 1px solid var(--border); }
+button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-sm { padding: 8px 12px; font-size: 13px; border-radius: 9px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); cursor: pointer; font-weight: 600; }
+.btn-link { background: none; border: none; color: var(--accent); cursor: pointer; font-weight: 700; padding: 0; }
+
+.linkbox { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.linkbox input { flex: 1; font-size: 13px; padding: 9px 10px; }
+
+.product { display: flex; gap: 12px; align-items: center; }
+.product .thumb { width: 52px; height: 52px; border-radius: 12px; background: var(--surface-2); object-fit: cover; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 20px; }
+.product .info { flex: 1; min-width: 0; }
+.product .name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.tabbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(15,17,21,0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.tabbar button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 12px 4px 18px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.tabbar button .ic { font-size: 20px; }
+.tabbar button.active { color: var(--accent); }
+
+.spark { display: flex; align-items: flex-end; gap: 5px; height: 64px; margin-top: 12px; }
+.spark .bar { flex: 1; background: var(--accent-dim); border-radius: 4px 4px 0 0; min-height: 3px; position: relative; }
+.spark .bar.today { background: var(--accent); }
+.spark-labels { display: flex; gap: 5px; margin-top: 6px; }
+.spark-labels span { flex: 1; text-align: center; font-size: 10px; color: var(--muted); }
+
+.toast {
+  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+  background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
+  padding: 12px 18px; border-radius: 12px; box-shadow: var(--shadow); z-index: 50;
+  font-size: 14px; max-width: 90%;
+}
+.hidden { display: none !important; }
+.center { text-align: center; }
+.empty { text-align: center; color: var(--muted); padding: 28px 12px; }
+.mt { margin-top: 14px; }
+.right { text-align: right; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+a { color: var(--accent); }
+
+body { padding: 20px 0; }
+.preview-note { max-width: 480px; margin: 0 auto 14px; padding: 10px 16px; font-size: 12px; color: var(--muted); text-align: center; }
+.preview-note b { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="preview-note"><b>LedgerLink preview</b> — running offline with demo data. Tap the tabs at the bottom. (Account: Amaka Styles)</div>
+<div class="app" id="app"></div>
+<div id="toast"></div>
+<script>
+/* In-memory mock of the LedgerLink backend, used only by preview.html so the
+ * real UI (public/app.js) can run offline with no server. The seeded numbers
+ * mirror `npm run seed`. This file is NOT used by the production app. */
+(function () {
+  'use strict';
+
+  const N = (naira) => Math.round(naira * 100); // → kobo
+
+  const db = {
+    seller: { id: 1, phone: '+2348030000001', name: 'Amaka', business_name: 'Amaka Styles' },
+    products: [
+      { id: 1, name: 'Blue Ankara Dress', price_kobo: N(15000), photo_url: null, stock: 8, low_stock_at: 3, pay_token: 'demoBlueDress', archived: false },
+      { id: 2, name: 'Beaded Slippers', price_kobo: N(6500), photo_url: null, stock: 2, low_stock_at: 3, pay_token: 'demoSlippers', archived: false },
+      { id: 3, name: 'Gold Hoop Earrings', price_kobo: N(4500), photo_url: null, stock: 25, low_stock_at: 3, pay_token: 'demoEarrings', archived: false },
+      { id: 4, name: 'Silk Headwrap', price_kobo: N(3000), photo_url: null, stock: 1, low_stock_at: 3, pay_token: 'demoHeadwrap', archived: false },
+    ],
+    orders: [],
+    nextProductId: 5,
+    nextOrderId: 1,
+  };
+
+  // Build a week of paid/pending orders so the dashboard looks alive.
+  const DAY = 86400000;
+  const names = ['Tunde', 'Chidi', 'Ngozi', 'Bola', 'Emeka', 'Fatima'];
+  const channels = ['whatsapp', 'instagram', 'link', 'tiktok'];
+  let seed = 7;
+  const rand = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  for (let day = 6; day >= 0; day--) {
+    const count = Math.floor(rand() * 3) + (day === 0 ? 2 : 1);
+    for (let i = 0; i < count; i++) {
+      const p = db.products[Math.floor(rand() * db.products.length)];
+      const ts = Date.now() - day * DAY - Math.floor(rand() * DAY * 0.5);
+      const paid = rand() > 0.18;
+      db.orders.push({
+        id: db.nextOrderId++, product_id: p.id, product_name: p.name,
+        buyer_name: names[Math.floor(rand() * names.length)],
+        buyer_phone: '+23480' + Math.floor(10000000 + rand() * 89999999),
+        amount_kobo: p.price_kobo, quantity: 1,
+        channel: channels[Math.floor(rand() * channels.length)],
+        status: paid ? 'paid' : 'pending', confirmation_sent: paid,
+        created_at: ts, paid_at: paid ? ts : null,
+      });
+    }
+  }
+
+  // Guarantee a couple of pending orders (e.g. bank transfers not yet cleared)
+  // so the "money received vs pending" card has something to show.
+  db.orders.push(
+    { id: db.nextOrderId++, product_id: 1, product_name: 'Blue Ankara Dress', buyer_name: 'Zainab', buyer_phone: '+2348051234567', amount_kobo: db.products[0].price_kobo, quantity: 1, channel: 'whatsapp', status: 'pending', confirmation_sent: false, created_at: Date.now() - 3600000, paid_at: null },
+    { id: db.nextOrderId++, product_id: 3, product_name: 'Gold Hoop Earrings', buyer_name: 'Kemi', buyer_phone: '+2348069876543', amount_kobo: db.products[2].price_kobo, quantity: 1, channel: 'instagram', status: 'pending', confirmation_sent: false, created_at: Date.now() - 1200000, paid_at: null }
+  );
+
+  const naira = (k) => k;
+  const LAGOS = 3600000;
+  const startToday = () => Math.floor((Date.now() + LAGOS) / DAY) * DAY - LAGOS;
+
+  function dashboard() {
+    const today0 = startToday();
+    const week0 = today0 - 6 * DAY, lastWeek0 = week0 - 7 * DAY;
+    const sum = (from, to) => db.orders.filter((o) => o.status === 'paid' && o.paid_at >= from && o.paid_at < to)
+      .reduce((a, o) => ({ total: a.total + o.amount_kobo, count: a.count + 1 }), { total: 0, count: 0 });
+    const today = sum(today0, Date.now() + 1), week = sum(week0, Date.now() + 1), last = sum(lastWeek0, week0);
+
+    const byProduct = {};
+    db.orders.filter((o) => o.status === 'paid').forEach((o) => {
+      byProduct[o.product_id] = byProduct[o.product_id] || { product_id: o.product_id, product_name: o.product_name, revenue_kobo: 0, units: 0 };
+      byProduct[o.product_id].revenue_kobo += o.amount_kobo;
+      byProduct[o.product_id].units += o.quantity;
+    });
+    const topProducts = Object.values(byProduct).sort((a, b) => b.revenue_kobo - a.revenue_kobo).slice(0, 3);
+    const lowStock = db.products.filter((p) => !p.archived && p.stock <= p.low_stock_at).sort((a, b) => a.stock - b.stock);
+    const pending = db.orders.filter((o) => o.status === 'pending').reduce((a, o) => ({ amount_kobo: a.amount_kobo + o.amount_kobo, count: a.count + 1 }), { amount_kobo: 0, count: 0 });
+    const trend = [];
+    for (let i = 6; i >= 0; i--) { const d0 = today0 - i * DAY; const s = sum(d0, d0 + DAY); trend.push({ date: new Date(d0).toISOString().slice(0, 10), total_kobo: s.total }); }
+    const delta = last.total === 0 ? (week.total > 0 ? 100 : 0) : Math.round(((week.total - last.total) / last.total) * 100);
+    return { today: { revenue_kobo: today.total, orders: today.count }, week: { revenue_kobo: week.total, orders: week.count }, lastWeek: { revenue_kobo: last.total, orders: last.count }, weekDeltaPct: delta, topProducts, lowStock, pending, trend };
+  }
+
+  function publicProduct(p) {
+    return { id: p.id, name: p.name, price_kobo: p.price_kobo, price_naira: p.price_kobo / 100, photo_url: p.photo_url, stock: p.stock, low_stock_at: p.low_stock_at, low_stock: p.stock <= p.low_stock_at, pay_token: p.pay_token, payment_link: location.origin + '/pay/' + p.pay_token, archived: p.archived };
+  }
+
+  function statement() {
+    const months = {};
+    db.orders.filter((o) => o.status === 'paid').forEach((o) => {
+      const m = new Date(o.paid_at + LAGOS).toISOString().slice(0, 7);
+      months[m] = months[m] || { month: m, orders: 0, revenue_kobo: 0 };
+      months[m].orders++; months[m].revenue_kobo += o.amount_kobo;
+    });
+    const list = Object.values(months).sort((a, b) => a.month.localeCompare(b.month));
+    const totalRev = list.reduce((a, m) => a + m.revenue_kobo, 0);
+    const totalOrders = list.reduce((a, m) => a + m.orders, 0);
+    return { business: db.seller, generated_at: Date.now(), months: list.map((m) => ({ ...m, revenue_naira: m.revenue_kobo / 100 })), totals: { orders: totalOrders, revenue_kobo: totalRev, revenue_naira: totalRev / 100 }, months_active: list.length, avg_monthly_revenue_naira: list.length ? totalRev / 100 / list.length : 0 };
+  }
+
+  // Override fetch for the endpoints app.js calls.
+  const json = (obj, status = 200) => Promise.resolve({ ok: status < 400, status, json: () => Promise.resolve(obj) });
+  window.fetch = function (path, opts = {}) {
+    const method = (opts.method || 'GET').toUpperCase();
+    const body = opts.body ? JSON.parse(opts.body) : {};
+    const m = path.match(/\/api\/products\/(\d+)/);
+    if (path === '/api/me') return json({ seller: db.seller, integrations: { paystack: false, whatsapp: false } });
+    if (path === '/api/logout') { return json({ ok: true }); }
+    if (path === '/api/dashboard') return json(dashboard());
+    if (path === '/api/statement') return json(statement());
+    if (path === '/api/orders') return json({ orders: db.orders.slice().sort((a, b) => b.created_at - a.created_at).map((o) => ({ ...o, amount_text: '₦' + (o.amount_kobo / 100).toLocaleString('en-NG') })) });
+    if (path === '/api/products' && method === 'GET') return json({ products: db.products.filter((p) => !p.archived).map(publicProduct) });
+    if (path === '/api/products' && method === 'POST') {
+      const p = { id: db.nextProductId++, name: body.name, price_kobo: Math.round((body.price_naira || 0) * 100), photo_url: body.photo_url || null, stock: body.stock || 0, low_stock_at: body.low_stock_at ?? 3, pay_token: 'demo' + Math.random().toString(36).slice(2, 8), archived: false };
+      db.products.unshift(p); return json({ product: publicProduct(p) }, 201);
+    }
+    if (m && method === 'PATCH') {
+      const p = db.products.find((x) => x.id == m[1]);
+      if (body.name != null) p.name = body.name;
+      if (body.price_naira != null) p.price_kobo = Math.round(body.price_naira * 100);
+      if (body.photo_url != null) p.photo_url = body.photo_url || null;
+      if (body.stock != null) p.stock = body.stock;
+      if (body.low_stock_at != null) p.low_stock_at = body.low_stock_at;
+      return json({ product: publicProduct(p) });
+    }
+    if (m && method === 'DELETE') { const p = db.products.find((x) => x.id == m[1]); if (p) p.archived = true; return json({ ok: true }); }
+    return json({ error: 'not found in preview' }, 404);
+  };
+})();
+
+</script>
+<script>
+'use strict';
+
+const App = (() => {
+  const el = (id) => document.getElementById(id);
+  const app = el('app');
+  let state = { seller: null, tab: 'home', integrations: {} };
+
+  // ---- helpers ----------------------------------------------------------
+  async function api(method, path, body) {
+    const res = await fetch(path, {
+      method,
+      headers: body ? { 'Content-Type': 'application/json' } : {},
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `request failed (${res.status})`);
+    return data;
+  }
+
+  function naira(kobo) {
+    return '₦' + (kobo / 100).toLocaleString('en-NG', { maximumFractionDigits: 2 });
+  }
+
+  function toast(msg, ms = 2600) {
+    const t = el('toast');
+    t.innerHTML = `<div class="toast">${msg}</div>`;
+    setTimeout(() => (t.innerHTML = ''), ms);
+  }
+
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  }
+
+  function timeAgo(ts) {
+    if (!ts) return '';
+    const s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return 'just now';
+    if (s < 3600) return `${Math.floor(s / 60)}m ago`;
+    if (s < 86400) return `${Math.floor(s / 3600)}h ago`;
+    return `${Math.floor(s / 86400)}d ago`;
+  }
+
+  // ---- auth screen ------------------------------------------------------
+  function renderAuth(mode = 'signup') {
+    app.innerHTML = `
+      <div class="brand"><span class="dot"></span> LedgerLink
+        <small>Your WhatsApp &amp; Instagram sales — finally visible</small>
+      </div>
+      <div class="card">
+        <h1>${mode === 'signup' ? 'Start in under 10 minutes' : 'Welcome back'}</h1>
+        <p class="muted">${mode === 'signup' ? 'Keep selling the way you already do. We just record every payment for you.' : 'Log in to your dashboard.'}</p>
+        <div id="authForm" class="mt"></div>
+      </div>
+      <p class="center muted">
+        ${mode === 'signup'
+          ? 'Already have an account? <button class="btn-link" id="toLogin">Log in</button>'
+          : 'New here? <button class="btn-link" id="toSignup">Create account</button>'}
+      </p>`;
+
+    const form = el('authForm');
+    form.innerHTML =
+      (mode === 'signup'
+        ? `<div class="field"><label>Your name</label><input id="f_name" placeholder="e.g. Amaka" /></div>
+           <div class="field"><label>Business name (optional)</label><input id="f_biz" placeholder="e.g. Amaka Styles" /></div>`
+        : '') +
+      `<div class="field"><label>Phone number</label><input id="f_phone" inputmode="tel" placeholder="0803 123 4567" /></div>
+       <div class="field"><label>${mode === 'signup' ? 'Create a 4-digit PIN' : 'PIN'}</label><input id="f_pin" inputmode="numeric" maxlength="6" type="password" placeholder="••••" /></div>
+       <button class="btn" id="f_submit">${mode === 'signup' ? 'Create my account' : 'Log in'}</button>`;
+
+    el('f_submit').onclick = async () => {
+      const phone = el('f_phone').value.trim();
+      const pin = el('f_pin').value.trim();
+      try {
+        if (mode === 'signup') {
+          const name = el('f_name').value.trim();
+          if (!name) return toast('Please enter your name');
+          await api('POST', '/api/signup', { name, business_name: el('f_biz').value.trim(), phone, pin });
+        } else {
+          await api('POST', '/api/login', { phone, pin });
+        }
+        await boot();
+      } catch (e) {
+        toast(e.message);
+      }
+    };
+    if (el('toLogin')) el('toLogin').onclick = () => renderAuth('login');
+    if (el('toSignup')) el('toSignup').onclick = () => renderAuth('signup');
+  }
+
+  // ---- shell + tabs -----------------------------------------------------
+  function shell(inner) {
+    app.innerHTML = `
+      <div class="brand"><span class="dot"></span> LedgerLink
+        <small>${esc(state.seller.business_name || state.seller.name)}</small>
+      </div>
+      <div id="screen">${inner}</div>`;
+    renderTabbar();
+  }
+
+  function renderTabbar() {
+    let bar = document.querySelector('.tabbar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'tabbar';
+      document.body.appendChild(bar);
+    }
+    const tabs = [
+      ['home', '📊', 'Sales'],
+      ['products', '🏷️', 'Products'],
+      ['orders', '🧾', 'Orders'],
+      ['grow', '🚀', 'Grow'],
+    ];
+    bar.innerHTML = tabs
+      .map(([id, ic, label]) => `<button data-tab="${id}" class="${state.tab === id ? 'active' : ''}"><span class="ic">${ic}</span>${label}</button>`)
+      .join('');
+    bar.querySelectorAll('button').forEach((b) => (b.onclick = () => go(b.dataset.tab)));
+  }
+
+  function go(tab) {
+    state.tab = tab;
+    if (tab === 'home') renderHome();
+    else if (tab === 'products') renderProducts();
+    else if (tab === 'orders') renderOrders();
+    else if (tab === 'grow') renderGrow();
+  }
+
+  // ---- home / dashboard -------------------------------------------------
+  async function renderHome() {
+    shell('<div class="empty">Loading your numbers…</div>');
+    let d;
+    try {
+      d = await api('GET', '/api/dashboard');
+    } catch (e) {
+      return shell(`<div class="empty">${e.message}</div>`);
+    }
+
+    const delta = d.weekDeltaPct;
+    const trendPill =
+      delta > 0 ? `<span class="pill up">▲ ${delta}% vs last week</span>`
+      : delta < 0 ? `<span class="pill down">▼ ${Math.abs(delta)}% vs last week</span>`
+      : `<span class="pill flat">— same as last week</span>`;
+
+    const max = Math.max(1, ...d.trend.map((t) => t.total_kobo));
+    const bars = d.trend
+      .map((t, i) => {
+        const h = Math.round((t.total_kobo / max) * 100);
+        const today = i === d.trend.length - 1;
+        return `<div class="bar ${today ? 'today' : ''}" style="height:${Math.max(h, 3)}%" title="${esc(t.date)}: ${naira(t.total_kobo)}"></div>`;
+      })
+      .join('');
+    const dayLabels = d.trend.map((t) => `<span>${['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][new Date(t.date).getUTCDay()]}</span>`).join('');
+
+    const top = d.topProducts.length
+      ? d.topProducts
+          .map(
+            (p, i) => `<div class="row"><div><span class="title">${i + 1}. ${esc(p.product_name)}</span><div class="meta">${p.units} sold</div></div><div class="amount">${naira(p.revenue_kobo)}</div></div>`
+          )
+          .join('')
+      : '<div class="empty">No sales yet. Share a payment link to get started.</div>';
+
+    const low = d.lowStock.length
+      ? d.lowStock
+          .map((p) => `<div class="row"><div class="title">${esc(p.name)}</div><div><span class="badge low">${p.stock} left</span></div></div>`)
+          .join('')
+      : '<div class="empty">Nothing running low 👍</div>';
+
+    shell(`
+      <div class="grid-2">
+        <div class="card stat"><div class="label">Today</div><div class="value">${naira(d.today.revenue_kobo)}</div><div class="sub">${d.today.orders} order${d.today.orders === 1 ? '' : 's'}</div></div>
+        <div class="card stat"><div class="label">This week</div><div class="value">${naira(d.week.revenue_kobo)}</div><div class="sub">${d.week.orders} order${d.week.orders === 1 ? '' : 's'}</div></div>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><h2 style="margin:0">This week</h2>${trendPill}</div>
+        <div class="spark">${bars}</div>
+        <div class="spark-labels">${dayLabels}</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card stat"><div class="label">Money received</div><div class="value" style="color:var(--accent)">${naira(d.week.revenue_kobo)}</div><div class="sub">cleared this week</div></div>
+        <div class="card stat"><div class="label">Still pending</div><div class="value" style="color:var(--warn)">${naira(d.pending.amount_kobo)}</div><div class="sub">${d.pending.count} awaiting payment</div></div>
+      </div>
+
+      <div class="card"><h2>Top products</h2>${top}</div>
+      <div class="card"><h2>Stock running low</h2>${low}</div>
+    `);
+  }
+
+  // ---- products ---------------------------------------------------------
+  async function renderProducts() {
+    shell('<div class="empty">Loading products…</div>');
+    let products = [];
+    try {
+      products = (await api('GET', '/api/products')).products;
+    } catch (e) {
+      return shell(`<div class="empty">${e.message}</div>`);
+    }
+
+    const list = products.length
+      ? products
+          .map(
+            (p) => `
+        <div class="card">
+          <div class="product">
+            <div class="thumb">${p.photo_url ? `<img src="${esc(p.photo_url)}" class="thumb" style="margin:0" />` : '🏷️'}</div>
+            <div class="info">
+              <div class="name">${esc(p.name)}</div>
+              <div class="meta">${naira(p.price_kobo)} · <span class="${p.low_stock ? '' : 'muted'}">${p.stock} in stock${p.low_stock ? ' ⚠️' : ''}</span></div>
+            </div>
+          </div>
+          <div class="linkbox">
+            <input readonly value="${esc(p.payment_link)}" />
+            <button class="btn-sm" data-copy="${esc(p.payment_link)}">Copy</button>
+          </div>
+          <div class="linkbox">
+            <button class="btn-sm" data-edit="${p.id}">Edit</button>
+            <button class="btn-sm" data-restock="${p.id}">Restock</button>
+            <a class="btn-sm" href="${esc(p.payment_link)}" target="_blank" style="text-decoration:none">Open link ↗</a>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<div class="empty">No products yet. Add your first one below — it only takes a moment.</div>';
+
+    shell(`
+      <h1>Products</h1>
+      <p class="muted">Each product gets its own payment link. Paste it in WhatsApp, Instagram, anywhere.</p>
+      <button class="btn mt" id="addBtn">+ Add product</button>
+      <div id="prodList" class="mt">${list}</div>`);
+
+    el('addBtn').onclick = () => productForm();
+    document.querySelectorAll('[data-copy]').forEach((b) => (b.onclick = () => {
+      navigator.clipboard?.writeText(b.dataset.copy);
+      toast('Payment link copied — paste it to your customer');
+    }));
+    document.querySelectorAll('[data-edit]').forEach((b) => (b.onclick = () => productForm(products.find((p) => p.id == b.dataset.edit))));
+    document.querySelectorAll('[data-restock]').forEach((b) => (b.onclick = () => restock(products.find((p) => p.id == b.dataset.restock))));
+  }
+
+  function productForm(existing) {
+    const isEdit = !!existing;
+    app.querySelector('#screen').innerHTML = `
+      <h1>${isEdit ? 'Edit product' : 'Add product'}</h1>
+      <div class="card mt">
+        <div class="field"><label>Product name</label><input id="p_name" value="${esc(existing?.name || '')}" placeholder="Blue dress" /></div>
+        <div class="field"><label>Price (₦)</label><input id="p_price" inputmode="decimal" value="${existing ? existing.price_kobo / 100 : ''}" placeholder="15000" /></div>
+        <div class="field"><label>Stock count</label><input id="p_stock" inputmode="numeric" value="${existing ? existing.stock : ''}" placeholder="10" /></div>
+        <div class="field"><label>Photo URL (optional)</label><input id="p_photo" value="${esc(existing?.photo_url || '')}" placeholder="https://…" /></div>
+        <div class="field"><label>Flag as low stock when at or below</label><input id="p_low" inputmode="numeric" value="${existing ? existing.low_stock_at : 3}" /></div>
+        <button class="btn" id="p_save">${isEdit ? 'Save changes' : 'Add product'}</button>
+        ${isEdit ? '<button class="btn danger mt" id="p_delete">Remove product</button>' : ''}
+        <button class="btn secondary mt" id="p_cancel">Cancel</button>
+      </div>`;
+
+    el('p_save').onclick = async () => {
+      const payload = {
+        name: el('p_name').value.trim(),
+        price_naira: parseFloat(el('p_price').value),
+        stock: parseInt(el('p_stock').value || '0', 10),
+        photo_url: el('p_photo').value.trim(),
+        low_stock_at: parseInt(el('p_low').value || '3', 10),
+      };
+      if (!payload.name) return toast('Enter a product name');
+      if (!(payload.price_naira > 0)) return toast('Enter a valid price');
+      try {
+        if (isEdit) await api('PATCH', `/api/products/${existing.id}`, payload);
+        else await api('POST', '/api/products', payload);
+        toast(isEdit ? 'Saved' : 'Product added — payment link ready');
+        renderProducts();
+      } catch (e) {
+        toast(e.message);
+      }
+    };
+    if (el('p_delete'))
+      el('p_delete').onclick = async () => {
+        if (!confirm('Remove this product?')) return;
+        await api('DELETE', `/api/products/${existing.id}`);
+        toast('Removed');
+        renderProducts();
+      };
+    el('p_cancel').onclick = () => renderProducts();
+  }
+
+  async function restock(p) {
+    const add = prompt(`Add stock for "${p.name}". Current: ${p.stock}. How many to add?`, '10');
+    if (add === null) return;
+    const n = parseInt(add, 10);
+    if (!Number.isFinite(n)) return;
+    await api('PATCH', `/api/products/${p.id}`, { stock: p.stock + n });
+    toast(`Stock updated to ${p.stock + n}`);
+    renderProducts();
+  }
+
+  // ---- orders -----------------------------------------------------------
+  async function renderOrders() {
+    shell('<div class="empty">Loading orders…</div>');
+    let orders = [];
+    try {
+      orders = (await api('GET', '/api/orders')).orders;
+    } catch (e) {
+      return shell(`<div class="empty">${e.message}</div>`);
+    }
+    const rows = orders.length
+      ? orders
+          .map(
+            (o) => `
+        <div class="row">
+          <div>
+            <span class="title">${esc(o.product_name)}</span>
+            <div class="meta">${esc(o.buyer_name || 'Customer')} · ${esc(o.channel)} · ${timeAgo(o.created_at)}${o.status === 'paid' && o.confirmation_sent ? ' · ✅ confirmed' : ''}</div>
+          </div>
+          <div class="right">
+            <div class="amount">${o.amount_text}</div>
+            <span class="badge ${o.status}">${o.status}</span>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<div class="empty">No orders yet.</div>';
+    shell(`<h1>Orders</h1><p class="muted">Every payment becomes a record here automatically.</p><div class="card mt">${rows}</div>`);
+  }
+
+  // ---- grow / formalization --------------------------------------------
+  async function renderGrow() {
+    shell('<div class="empty">Loading…</div>');
+    let s;
+    try {
+      s = await api('GET', '/api/statement');
+    } catch (e) {
+      return shell(`<div class="empty">${e.message}</div>`);
+    }
+    const months = s.months.length
+      ? s.months
+          .map((m) => `<div class="row"><div class="title">${esc(m.month)}</div><div class="amount">${naira(m.revenue_kobo)}<div class="meta right">${m.orders} orders</div></div></div>`)
+          .join('')
+      : '<div class="empty">Your revenue history will build up here as you sell.</div>';
+
+    shell(`
+      <h1>Grow &amp; formalize</h1>
+      <p class="muted">Your real, verifiable revenue history — the record banks and lenders never had before.</p>
+
+      <div class="grid-2 mt">
+        <div class="card stat"><div class="label">Total revenue</div><div class="value">${naira(s.totals.revenue_kobo)}</div><div class="sub">${s.totals.orders} paid orders</div></div>
+        <div class="card stat"><div class="label">Avg / month</div><div class="value">${naira(Math.round(s.avg_monthly_revenue_naira * 100))}</div><div class="sub">${s.months_active} month${s.months_active === 1 ? '' : 's'} active</div></div>
+      </div>
+
+      <div class="card"><h2>Monthly revenue statement</h2>${months}</div>
+
+      <div class="card">
+        <h2>Ready when you are</h2>
+        <p class="muted">After a few months of clean history you can use this to access working capital, inventory financing, or register formally.</p>
+        <a class="btn" href="/api/export.csv" style="text-decoration:none;display:block;text-align:center">⬇ Download sales statement (CSV)</a>
+        <button class="btn secondary mt" id="logoutBtn">Log out</button>
+      </div>`);
+
+    el('logoutBtn').onclick = async () => {
+      await api('POST', '/api/logout');
+      location.reload();
+    };
+  }
+
+  // ---- boot -------------------------------------------------------------
+  async function boot() {
+    try {
+      const me = await api('GET', '/api/me');
+      if (me.seller) {
+        state.seller = me.seller;
+        state.integrations = me.integrations || {};
+        go('home');
+      } else {
+        renderAuth('signup');
+      }
+    } catch (_) {
+      renderAuth('signup');
+    }
+  }
+
+  return { boot };
+})();
+
+App.boot();
+
+</script>
+</body>
+</html>
