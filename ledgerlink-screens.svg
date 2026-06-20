@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1290" height="880" viewBox="0 0 1290 880" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+<rect width="1290" height="880" fill="#05070a"/>
+<text x="645" y="34" fill="#f4f6fb" font-size="20" font-weight="800" text-anchor="middle">LedgerLink — your WhatsApp &amp; Instagram sales, finally visible</text>
+<text x="645" y="58" fill="#98a1b3" font-size="13" text-anchor="middle">Same way you already sell. Every payment becomes a record automatically.</text>
+<rect x="30" y="80" width="380" height="760" rx="30" fill="#0f1115" stroke="#2a2f3a" stroke-width="2"/>
+<rect x="180" y="90" width="80" height="6" rx="3" fill="#20242e"/>
+<text x="220" y="866" fill="#98a1b3" font-size="13" font-weight="700" text-anchor="middle">Sales dashboard — everything that used to live in your head</text>
+<circle cx="58" cy="122" r="6" fill="#18c07a"/>
+<text x="72" y="127" fill="#f4f6fb" font-size="16" font-weight="800" text-anchor="start">LedgerLink</text>
+<text x="72" y="144" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Amaka Styles</text>
+<rect x="46" y="164" width="168" height="92" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="226" y="164" width="168" height="92" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="60" y="190" fill="#98a1b3" font-size="12" font-weight="400" text-anchor="start">Today</text>
+<text x="60" y="222" fill="#f4f6fb" font-size="24" font-weight="800" text-anchor="start">₦28,000</text>
+<text x="60" y="242" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">3 orders</text>
+<text x="240" y="190" fill="#98a1b3" font-size="12" font-weight="400" text-anchor="start">This week</text>
+<text x="240" y="222" fill="#f4f6fb" font-size="22" font-weight="800" text-anchor="start">₦142,500</text>
+<text x="240" y="242" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">18 orders</text>
+<rect x="46" y="268" width="348" height="130" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="60" y="294" fill="#98a1b3" font-size="11" font-weight="700" text-anchor="start">THIS WEEK</text>
+<rect x="264" y="278" width="116" height="22" rx="11" fill="rgba(24,192,122,0.15)"/>
+<text x="322" y="293" fill="#18c07a" font-size="11" font-weight="700" text-anchor="middle">▲ 19% vs last week</text>
+<rect x="60" y="357" width="38.857142857142854" height="21" rx="3" fill="#0f7a4e"/>
+<rect x="106.85714285714286" y="346.5" width="38.857142857142854" height="31.5" rx="3" fill="#0f7a4e"/>
+<rect x="153.71428571428572" y="351.4" width="38.857142857142854" height="26.6" rx="3" fill="#0f7a4e"/>
+<rect x="200.57142857142856" y="334.6" width="38.857142857142854" height="43.4" rx="3" fill="#0f7a4e"/>
+<rect x="247.42857142857142" y="339.5" width="38.857142857142854" height="38.5" rx="3" fill="#0f7a4e"/>
+<rect x="294.2857142857143" y="323.4" width="38.857142857142854" height="54.6" rx="3" fill="#0f7a4e"/>
+<rect x="341.1428571428571" y="308" width="38.857142857142854" height="70" rx="3" fill="#18c07a"/>
+<text x="79.42857142857143" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Su</text>
+<text x="126.28571428571429" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Mo</text>
+<text x="173.14285714285714" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Tu</text>
+<text x="219.99999999999997" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">We</text>
+<text x="266.85714285714283" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Th</text>
+<text x="313.7142857142857" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Fr</text>
+<text x="360.57142857142856" y="392" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="middle">Sa</text>
+<rect x="46" y="410" width="168" height="88" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="226" y="410" width="168" height="88" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="60" y="434" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Money received</text>
+<text x="60" y="464" fill="#18c07a" font-size="20" font-weight="800" text-anchor="start">₦142,500</text>
+<text x="60" y="484" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">cleared this week</text>
+<text x="240" y="434" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Still pending</text>
+<text x="240" y="464" fill="#f6b73c" font-size="20" font-weight="800" text-anchor="start">₦19,500</text>
+<text x="240" y="484" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">2 awaiting</text>
+<rect x="46" y="510" width="348" height="118" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="60" y="534" fill="#98a1b3" font-size="11" font-weight="700" text-anchor="start">TOP PRODUCTS</text>
+<text x="60" y="560" fill="#f4f6fb" font-size="12" font-weight="600" text-anchor="start">1. Blue Ankara Dress</text>
+<text x="60" y="573" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="start">8 sold</text>
+<text x="380" y="560" fill="#f4f6fb" font-size="12" font-weight="700" text-anchor="end">₦120,000</text>
+<text x="60" y="584" fill="#f4f6fb" font-size="12" font-weight="600" text-anchor="start">2. Beaded Slippers</text>
+<text x="60" y="597" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="start">3 sold</text>
+<text x="380" y="584" fill="#f4f6fb" font-size="12" font-weight="700" text-anchor="end">₦19,500</text>
+<text x="60" y="608" fill="#f4f6fb" font-size="12" font-weight="600" text-anchor="start">3. Gold Hoop Earrings</text>
+<text x="60" y="621" fill="#98a1b3" font-size="9" font-weight="400" text-anchor="start">3 sold</text>
+<text x="380" y="608" fill="#f4f6fb" font-size="12" font-weight="700" text-anchor="end">₦13,500</text>
+<rect x="46" y="640" width="348" height="96" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="60" y="664" fill="#98a1b3" font-size="11" font-weight="700" text-anchor="start">STOCK RUNNING LOW</text>
+<text x="60" y="690" fill="#f4f6fb" font-size="12" font-weight="600" text-anchor="start">Silk Headwrap</text>
+<rect x="314" y="676" width="66" height="22" rx="11" fill="rgba(255,93,93,0.15)"/>
+<text x="347" y="691" fill="#ff5d5d" font-size="11" font-weight="700" text-anchor="middle">1 left</text>
+<text x="60" y="716" fill="#f4f6fb" font-size="12" font-weight="600" text-anchor="start">Beaded Slippers</text>
+<rect x="314" y="702" width="66" height="22" rx="11" fill="rgba(255,93,93,0.15)"/>
+<text x="347" y="717" fill="#ff5d5d" font-size="11" font-weight="700" text-anchor="middle">2 left</text>
+<rect x="445" y="80" width="380" height="760" rx="30" fill="#0f1115" stroke="#2a2f3a" stroke-width="2"/>
+<rect x="595" y="90" width="80" height="6" rx="3" fill="#20242e"/>
+<text x="635" y="866" fill="#98a1b3" font-size="13" font-weight="700" text-anchor="middle">Products — each one gets its own payment link</text>
+<circle cx="473" cy="122" r="6" fill="#18c07a"/>
+<text x="487" y="127" fill="#f4f6fb" font-size="16" font-weight="800" text-anchor="start">LedgerLink</text>
+<text x="487" y="144" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Amaka Styles</text>
+<text x="461" y="170" fill="#f4f6fb" font-size="22" font-weight="800" text-anchor="start">Products</text>
+<text x="461" y="192" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Paste a link in WhatsApp, Instagram, anywhere.</text>
+<rect x="461" y="208" width="348" height="44" rx="12" fill="#18c07a"/>
+<text x="635" y="236" fill="#04130c" font-size="14" font-weight="800" text-anchor="middle">+ Add product</text>
+<rect x="461" y="268" width="348" height="116" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="475" y="284" width="44" height="44" rx="11" fill="#20242e"/>
+<text x="497" y="312" fill="#f4f6fb" font-size="18" font-weight="400" text-anchor="middle">🏷️</text>
+<text x="529" y="302" fill="#f4f6fb" font-size="14" font-weight="700" text-anchor="start">Blue Ankara Dress</text>
+<text x="529" y="320" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">₦15,000 · 8 in stock</text>
+<rect x="475" y="338" width="256" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="485" y="358" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">ledgerlink.app/pay/demoBlueDress</text>
+<rect x="739" y="338" width="56" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="767" y="358" fill="#f4f6fb" font-size="11" font-weight="600" text-anchor="middle">Copy</text>
+<rect x="461" y="396" width="348" height="116" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="475" y="412" width="44" height="44" rx="11" fill="#20242e"/>
+<text x="497" y="440" fill="#f4f6fb" font-size="18" font-weight="400" text-anchor="middle">🏷️</text>
+<text x="529" y="430" fill="#f4f6fb" font-size="14" font-weight="700" text-anchor="start">Beaded Slippers</text>
+<text x="529" y="448" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">₦6,500 · 2 in stock ⚠️</text>
+<rect x="475" y="466" width="256" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="485" y="486" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">ledgerlink.app/pay/demoSlippers</text>
+<rect x="739" y="466" width="56" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="767" y="486" fill="#f4f6fb" font-size="11" font-weight="600" text-anchor="middle">Copy</text>
+<rect x="461" y="524" width="348" height="116" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="475" y="540" width="44" height="44" rx="11" fill="#20242e"/>
+<text x="497" y="568" fill="#f4f6fb" font-size="18" font-weight="400" text-anchor="middle">🏷️</text>
+<text x="529" y="558" fill="#f4f6fb" font-size="14" font-weight="700" text-anchor="start">Gold Hoop Earrings</text>
+<text x="529" y="576" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">₦4,500 · 25 in stock</text>
+<rect x="475" y="594" width="256" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="485" y="614" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">ledgerlink.app/pay/demoEarrings</text>
+<rect x="739" y="594" width="56" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="767" y="614" fill="#f4f6fb" font-size="11" font-weight="600" text-anchor="middle">Copy</text>
+<rect x="461" y="652" width="348" height="116" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="475" y="668" width="44" height="44" rx="11" fill="#20242e"/>
+<text x="497" y="696" fill="#f4f6fb" font-size="18" font-weight="400" text-anchor="middle">🏷️</text>
+<text x="529" y="686" fill="#f4f6fb" font-size="14" font-weight="700" text-anchor="start">Silk Headwrap</text>
+<text x="529" y="704" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">₦3,000 · 1 in stock ⚠️</text>
+<rect x="475" y="722" width="256" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="485" y="742" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="start">ledgerlink.app/pay/demoHeadwrap</text>
+<rect x="739" y="722" width="56" height="32" rx="9" fill="#20242e" stroke="#2a2f3a"/>
+<text x="767" y="742" fill="#f4f6fb" font-size="11" font-weight="600" text-anchor="middle">Copy</text>
+<rect x="860" y="80" width="380" height="760" rx="30" fill="#0f1115" stroke="#2a2f3a" stroke-width="2"/>
+<rect x="1010" y="90" width="80" height="6" rx="3" fill="#20242e"/>
+<text x="1050" y="866" fill="#98a1b3" font-size="13" font-weight="700" text-anchor="middle">What the customer sees when they tap the link</text>
+<circle cx="888" cy="122" r="6" fill="#18c07a"/>
+<text x="902" y="127" fill="#f4f6fb" font-size="16" font-weight="800" text-anchor="start">LedgerLink</text>
+<text x="902" y="144" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Amaka Styles</text>
+<rect x="876" y="176" width="348" height="84" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<rect x="890" y="192" width="52" height="52" rx="12" fill="#20242e"/>
+<text x="916" y="224" fill="#f4f6fb" font-size="22" font-weight="400" text-anchor="middle">🛍️</text>
+<text x="954" y="214" fill="#f4f6fb" font-size="15" font-weight="700" text-anchor="start">Blue Ankara Dress</text>
+<text x="954" y="234" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Pay securely</text>
+<text x="1210" y="220" fill="#f4f6fb" font-size="16" font-weight="800" text-anchor="end">₦15,000</text>
+<rect x="876" y="276" width="348" height="290" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="890" y="308" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Your name</text>
+<rect x="890" y="318" width="320" height="40" rx="11" fill="#20242e" stroke="#2a2f3a"/>
+<text x="904" y="343" fill="#98a1b3" font-size="12" font-weight="400" text-anchor="start">Full name</text>
+<text x="890" y="384" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">WhatsApp number</text>
+<rect x="890" y="394" width="320" height="40" rx="11" fill="#20242e" stroke="#2a2f3a"/>
+<text x="904" y="419" fill="#98a1b3" font-size="12" font-weight="400" text-anchor="start">0803…</text>
+<text x="890" y="460" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="start">Email (optional)</text>
+<rect x="890" y="470" width="320" height="40" rx="11" fill="#20242e" stroke="#2a2f3a"/>
+<text x="904" y="495" fill="#98a1b3" font-size="12" font-weight="400" text-anchor="start">you@email.com</text>
+<rect x="890" y="530" width="320" height="44" rx="12" fill="#18c07a"/>
+<text x="1050" y="558" fill="#04130c" font-size="14" font-weight="800" text-anchor="middle">Pay ₦15,000</text>
+<text x="1050" y="594" fill="#98a1b3" font-size="11" font-weight="400" text-anchor="middle">🔒 Secured by Paystack</text>
+<rect x="876" y="584" width="348" height="150" rx="16" fill="#181b22" stroke="#2a2f3a"/>
+<text x="1050" y="640" fill="#f4f6fb" font-size="40" font-weight="400" text-anchor="middle">✅</text>
+<text x="1050" y="676" fill="#f4f6fb" font-size="16" font-weight="800" text-anchor="middle">Payment successful</text>
+<text x="1050" y="702" fill="#18c07a" font-size="11" font-weight="400" text-anchor="middle">Order recorded · stock −1 · seller notified</text>
+<text x="1050" y="720" fill="#98a1b3" font-size="10" font-weight="400" text-anchor="middle">A confirmation is sent to the WhatsApp thread</text>
+</svg>
