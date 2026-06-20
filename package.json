@@ -1,0 +1,17 @@
+{
+  "name": "ledgerlink",
+  "version": "0.1.0",
+  "description": "An invisible layer under WhatsApp/Instagram selling that turns every payment into a structured, visible business record.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "dev": "node --no-warnings --watch server.js",
+    "seed": "node --no-warnings scripts/seed.js",
+    "test": "node --no-warnings --test"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "license": "MIT"
+}
